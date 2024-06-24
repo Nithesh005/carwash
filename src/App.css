@@ -1,6 +1,41 @@
-*{
+* {
     padding: 0%;
-    margin:0% ;
+    margin: 0%;
     box-sizing: border-box;
     font-family: Arial, sans-serif;
+}
+
+
+/* modal css */
+.modal-close {
+    position: relative;
+    /* top: 10px; */
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 15px;
+    cursor: pointer;
+    color: red;
+
+}
+
+.CFname {
+    color: white;
+    font-size: small;
+    padding-left: 10px;
+}
+
+.loginHeader {
+    background-color: #000;
+    width: 100%;
+    border-radius: 8px 8px 0 0;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+}
+a{
+    text-decoration: none;
 }
