@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import { handWave } from "../assets/Images";
 import axios from "axios";
 import { SERVER } from "../Config";
-import { Context } from "../pages/BeforeLogin";
+import { MyContext } from "./AppBarResponsive";
 
 
 const style = {
@@ -24,16 +24,8 @@ const style = {
 
 
 export const LoginModal = () => {
-    const [open, setOpen] = useContext(Context);
-    // const [click, setClick] = 
-    // useEffect(() => {
-    //     if (click) {
-    //         setOpen(true);
-    //     }
-    // }, [click]);
 
-    // const handleOpen = () => setOpen(true);
-    // handleOpen()
+    const [open, setOpen] = useContext(MyContext);
     const handleClose = () => setOpen(false);
 
     const [formValues, setFormValues] = useState({
@@ -49,11 +41,10 @@ export const LoginModal = () => {
         console.log(formValues);
         try {
             const response = await axios.post(`${SERVER}login`, formValues);
-            console.log('Response:', response.data);
-            // Handle the response as needed
+            console.log('Response:', response.data.res);
+            localStorage.setItem('LoginKey', response.data.res);
         } catch (error) {
             console.error('Error:', error);
-            // Handle the error as needed
         }
 
     }

@@ -1,14 +1,9 @@
 import { AppBar, Avatar, Box, Container, CssBaseline, Drawer, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Menu, MenuItem, Toolbar, Tooltip, Typography } from "@mui/material"
 import { useState } from "react";
 import { Link, Route, Routes } from "react-router-dom";
+import { navigation, settings } from "../MappingObjects/Mappings";
 
-export const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
-export const navigation = [
-    { "tittle": "Dashboard", "path": "dashboard", "icon": "i" },
-    { "tittle": "Branch", "path": "branch", "icon": "i" },
-    { "tittle": "Staff", "path": "staff", "icon": "i" },
 
-];
 
 const ResponsiveAppBar = () => {
     const [anchorElNav, setAnchorElNav] = useState(null);

@@ -1,26 +1,48 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import BeforeLogin from './pages/BeforeLogin';
-import { ResponsiveAppBar } from './CF_Lib/ResponsiveAppBar';
+import { ResponsiveAppBar } from './CF_Lib/R---esponsiveAppBar';
+import { LoginModal } from './CF_Lib/LoginModal';
+
+
 function App() {
   const [Auth, setAuth] = useState(false);
+  const sessionData = localStorage.getItem('LoginKey');
+  useEffect(() => {
+    if (sessionData) {
+      console.log(sessionData, "this is new session");
+      setAuth(true);
+    } else {
+      setAuth(false);
+    }
+    return () => {
+      console.log('Cleanup');
+    };
+  }, [sessionData]);
+
+  const [open, setOpen] = useState(false);
+
   return (
     <div className="App">
 
-      <BrowserRouter>
 
-        {Auth ?
-          "kk"
-          :
-          <Routes>
-            <Route path={`/`} element={<BeforeLogin />} />
-            <Route path={`/Contact`} element={"Contact"} />
-            <Route path={`/dd`} element={"Login Component"} />
-            <Route path={`/dashboard`} element={"<Dashboard />"} />
-          </Routes>
-        }
-      </BrowserRouter>
+        <BrowserRouter>
+
+          {Auth ?
+            <Routes>
+              <Route path={`/`} element={<BeforeLogin />} />
+            </Routes>
+            :
+            <Routes>
+              <Route path={`/`} element={<BeforeLogin />} />
+              <Route path={`/Contact`} element={"Contact"} />
+              <Route path={`/dd`} element={"Login Component"} />
+              <Route path={`/dashboard`} element={"<Dashboard />"} />
+            </Routes>
+          }
+        </BrowserRouter>
+
     </div>
   );
 }
