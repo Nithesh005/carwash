@@ -11,14 +11,10 @@ function App() {
   const sessionData = localStorage.getItem('LoginKey');
   useEffect(() => {
     if (sessionData) {
-      console.log(sessionData, "this is new session");
       setAuth(true);
     } else {
       setAuth(false);
     }
-    return () => {
-      console.log('Cleanup');
-    };
   }, [sessionData]);
 
   const [open, setOpen] = useState(false);

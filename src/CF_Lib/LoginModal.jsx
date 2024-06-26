@@ -42,7 +42,10 @@ export const LoginModal = () => {
         try {
             const response = await axios.post(`${SERVER}login`, formValues);
             console.log('Response:', response.data.res);
-            localStorage.setItem('LoginKey', response.data.res);
+            if (response.data.res.token) {
+                localStorage.setItem('LoginKey', response.data.res);
+                handleClose();
+            }
         } catch (error) {
             console.error('Error:', error);
         }

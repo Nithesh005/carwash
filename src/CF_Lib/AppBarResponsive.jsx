@@ -1,7 +1,8 @@
 import { AppBar, Box, Button, Container, IconButton, Menu, MenuItem, Toolbar, Typography } from "@mui/material"
 import { navigation } from "../MappingObjects/Mappings"
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { LoginModal } from "./LoginModal";
+import { MenuOption } from "../Components/MenuOption";
 export const MyContext = createContext();
 
 export const AppBarResponsive = () => {
@@ -16,6 +17,22 @@ export const AppBarResponsive = () => {
 
     const [open, setOpen] = useState(false);
     const handleOpenClick = () => setOpen(true);
+
+    const [Auth, setAuth] = useState(false);
+    const sessionData = localStorage.getItem('LoginKey');
+    useEffect(() => {
+      if (sessionData) {
+        setAuth(true);
+      } else {
+        setAuth(false);
+      }
+    }, [sessionData]);
+
+    const destroySession = () =>{
+        localStorage.removeItem('LoginKey');
+        setAuth(false);
+    }
+   
     return (
         <div className="withModal">
             <MyContext.Provider value={[open, setOpen]}>
@@ -52,7 +69,7 @@ export const AppBarResponsive = () => {
                                 onClick={handleOpenNavMenu}
                                 color="inherit"
                             >
-                                menu icon
+                                menu
                             </IconButton>
                             <Menu
                                 id="menu-appbar"
@@ -79,12 +96,10 @@ export const AppBarResponsive = () => {
                                 ))}
                             </Menu>
                         </Box>
-                        {false ?
+                        {Auth ?
                             (
                                 <Typography>
-                                    <Button>
-                                        Log Out
-                                    </Button>
+                                    <MenuOption setAuth={setAuth}/>
                                 </Typography>
                             ) :
                             (
