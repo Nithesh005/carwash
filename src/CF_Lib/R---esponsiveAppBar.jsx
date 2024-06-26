@@ -1,7 +1,7 @@
 import { AppBar, Avatar, Box, Container, CssBaseline, Drawer, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Menu, MenuItem, Toolbar, Tooltip, Typography } from "@mui/material"
 import { useState } from "react";
 import { Link, Route, Routes } from "react-router-dom";
-import { navigation, settings } from "../MappingObjects/Mappings";
+import { navigation, settings } from "../utils/Mappings";
 
 
 

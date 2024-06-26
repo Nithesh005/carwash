@@ -1,6 +1,6 @@
 import { Box, Button, Modal, TextField, Typography } from "@mui/material"
 import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { handWave } from "../assets/Images";
 import axios from "axios";
 import { SERVER } from "../Config";
@@ -32,19 +32,21 @@ export const LoginModal = () => {
         username: '',
         password: ''
     });
-
+    
     const handleChange = (prop) => (event) => {
         setFormValues({ ...formValues, [prop]: event.target.value });
     };
-
+    
+    const navigate = useNavigate();
     const ValidateUser = async () => {
-        console.log(formValues);
+        // console.log(formValues);
         try {
             const response = await axios.post(`${SERVER}login`, formValues);
-            console.log('Response:', response.data.res);
+            // console.log('Response:', response.data.res);
             if (response.data.res.token) {
                 localStorage.setItem('LoginKey', response.data.res);
                 handleClose();
+                navigate('/home');
             }
         } catch (error) {
             console.error('Error:', error);

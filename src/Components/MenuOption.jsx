@@ -1,9 +1,10 @@
 import { Avatar, Box, Button, IconButton, Menu, MenuItem, Typography } from "@mui/material"
-import { navigation } from "../MappingObjects/Mappings"
+import { navigation } from "../utils/Mappings"
 import { useState } from "react";
 import LogoutIcon from '@mui/icons-material/Logout';
+import { useNavigate } from "react-router-dom";
 
-export const MenuOption = ({setAuth}) => {
+export const MenuOption = () => {
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
     const handleOpenNavMenu = (event) => {
@@ -13,12 +14,11 @@ export const MenuOption = ({setAuth}) => {
         setAnchorElNav(null);
     };
 
-    const destroySession = () =>{
+    const navigate = useNavigate();
+    const destroySession = () => {
         localStorage.removeItem('LoginKey');
-        setAuth(false);
-        handleCloseNavMenu();
+        navigate('/');
     }
-
 
     return (
         // <div className="hai">hello</div>
@@ -56,14 +56,11 @@ export const MenuOption = ({setAuth}) => {
                         <Typography textAlign="center">{item.tittle}</Typography>
                     </MenuItem>
                 ))}
-                <MenuItem onClick={destroySession}>
-                    <Typography textAlign="center">Log Out</Typography>
-                </MenuItem>
-                {/* <Button 
+                <MenuItem 
                 onClick={destroySession}
                 >
-                    Log Out
-                </Button> */}
+                    <Typography textAlign="center">Log Out</Typography>
+                </MenuItem>
             </Menu>
         </Box>
     )

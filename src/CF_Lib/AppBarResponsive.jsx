@@ -1,13 +1,15 @@
 import { AppBar, Box, Button, Container, IconButton, Menu, MenuItem, Toolbar, Typography } from "@mui/material"
-import { navigation } from "../MappingObjects/Mappings"
+import { navigation } from "../utils/Mappings"
 import { createContext, useContext, useEffect, useState } from "react";
 import { LoginModal } from "./LoginModal";
 import { MenuOption } from "../Components/MenuOption";
+import { useNavigate } from "react-router-dom";
 export const MyContext = createContext();
 
 export const AppBarResponsive = () => {
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
+    const navigate = useNavigate();
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
     };
@@ -18,21 +20,18 @@ export const AppBarResponsive = () => {
     const [open, setOpen] = useState(false);
     const handleOpenClick = () => setOpen(true);
 
-    const [Auth, setAuth] = useState(false);
-    const sessionData = localStorage.getItem('LoginKey');
-    useEffect(() => {
-      if (sessionData) {
-        setAuth(true);
-      } else {
-        setAuth(false);
-      }
-    }, [sessionData]);
+    // const [Auth, setAuth] = useState(false);
+    // const sessionData = localStorage.getItem('LoginKey');
+    // useEffect(() => {
+    //   if (sessionData) {
+    //     setAuth(true);
+    //     navigate('/dashboard');
+    //   } else {
+    //     setAuth(false);
+    //   }
+    // }, [sessionData]);
 
-    const destroySession = () =>{
-        localStorage.removeItem('LoginKey');
-        setAuth(false);
-    }
-   
+
     return (
         <div className="withModal">
             <MyContext.Provider value={[open, setOpen]}>
@@ -96,22 +95,17 @@ export const AppBarResponsive = () => {
                                 ))}
                             </Menu>
                         </Box>
-                        {Auth ?
-                            (
-                                <Typography>
-                                    <MenuOption setAuth={setAuth}/>
-                                </Typography>
-                            ) :
-                            (
-                                <Typography>
-                                    <Button
-                                        onClick={handleOpenClick}
-                                    >
-                                        Sign In
-                                    </Button>
-                                </Typography>
-                            )
-                        }
+                        {/* {!Auth && */}
+                        
+                        <Typography>
+                            <Button
+                                onClick={handleOpenClick}
+                            >
+                                Sign In
+                            </Button>
+                        </Typography>
+                        
+                        {/* } */}
 
 
                     </Toolbar>
