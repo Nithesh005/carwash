@@ -22,7 +22,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import AddIcon from '@mui/icons-material/Add';
 import { Badge, Button } from '@mui/material';
 import { MenuOption } from '../Components/MenuOption';
-import { navigation } from '../utils/Mappings';
+// import { navigation } from '../utils/Mappings';
 import { Link, Outlet } from 'react-router-dom';
 
 
@@ -89,6 +89,16 @@ const AppBar = styled(MuiAppBar, {
         }),
     }),
 }));
+
+export const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+export const navigation = [
+    { "tittle": "Dashboard", "path": "home", "icon": "i" },
+    { "tittle": "Staff", "path": "staff", "icon": "i" },
+    { "tittle": "Branch", "path": "branch", "icon": "i" },
+    { "tittle": "Service", "path": "Service", "icon": "i" },
+    { "tittle": "Bookings", "path": "Bookings", "icon": "i" },
+    { "tittle": "Follow ups", "path": "Follow ups", "icon": "i" },
+];
 
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
     ({ theme, open }) => ({
@@ -181,12 +191,12 @@ export default function MiniDrawer() {
                                                 justifyContent: 'center',
                                             }}
                                         >
-                                            {index % 2 === 0 ? <InboxIcon sx={{ color: red[500] }}/> : <MailIcon sx={{ color: blue[500] }}/>}
+                                            {index % 2 === 0 ? <InboxIcon sx={{ color: red[500] }} /> : <MailIcon sx={{ color: blue[500] }} />}
                                         </ListItemIcon>
                                         <ListItemText primary={text.tittle} sx={{ opacity: open ? 1 : 0 }} />
                                         {text.tittle === 'Service' &&
                                             <Badge color="secondary" badgeContent={9} sx={{ display: open ? 'block' : 'none', opacity: open ? 0.7 : 0 }}>
-                                                <MailIcon sx={{ color: pink[500] }}/>
+                                                <MailIcon sx={{ color: pink[500] }} />
                                             </Badge>
                                         }
                                     </ListItemButton>
